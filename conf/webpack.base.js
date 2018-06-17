@@ -19,9 +19,42 @@ module.exports = {
           loader: 'babel-loader',
           options: {
             presets: ['env', 'react'],
-            plugins: ['react-hot-loader/babel']
+            plugins: ['react-hot-loader/babel', 'transform-object-rest-spread']
           }
         }
+      },
+
+      {
+        test: /\.css$/,
+        use: [
+          { loader: "style-loader" }, { loader: "css-loader" }
+        ]
+      },
+
+      {
+        test: /\.scss$/,
+        use: [
+          {
+            loader: "style-loader"
+          },
+          {
+            loader: "css-loader",
+            options: {
+              sourceMap: true,
+              modules: true,
+              camelCase: true
+            }
+          },
+          {
+            loader: "resolve-url-loader"
+          },
+          {
+            loader: "sass-loader",
+            options: {
+              sourceMap: true,
+            }
+          }
+        ]
       }
     ]
   },
