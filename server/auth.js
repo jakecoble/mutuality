@@ -34,13 +34,15 @@ export default {
         }
       })
       .then(user => {
+        if (!user) {
+          return done(null, false, { message: 'Email not registered' });
+        }
         if (user.validPassword(password)) {
           return done(null, user);
         } else {
           return done(null, false, { message: 'Invalid password' });
         }
-      })
-      .catch(() => done(null, false, { message: 'Email not registered' }));
+      });
   },
 
   serializeUser (user, done) {
