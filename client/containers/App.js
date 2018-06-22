@@ -5,6 +5,7 @@ import { Route, Switch, Redirect, withRouter } from 'react-router-dom';
 
 import ProtectedRoutes from './ProtectedRoutes';
 import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 
 class App extends React.Component {
   render () {
@@ -12,6 +13,7 @@ class App extends React.Component {
       <div>
         <Switch>
           <Route path="/login" component={LoginForm}/>
+          <Route path="/register" component={RegisterForm}/>
 
           <ProtectedRoutes redirect="/login">
             <Route path="/" render={() => <div>logged in</div>}/>

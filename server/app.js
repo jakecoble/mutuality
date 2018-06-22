@@ -43,8 +43,13 @@ app.use(session({
 app.use(bodyParser.json());
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStrategy({
-  usernameField: 'email'
+passport.use('local-signup', new LocalStrategy({
+  usernameField: 'email',
+  passReqToCallback: true
+}, auth.signup));
+passport.use('local-login', new LocalStrategy({
+  usernameField: 'email',
+  passReqToCallback: true
 }, auth.login));
 passport.serializeUser(auth.serializeUser);
 passport.deserializeUser(auth.deserializeUser);

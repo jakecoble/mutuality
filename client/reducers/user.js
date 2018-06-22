@@ -13,6 +13,7 @@ export default function user (state = initialState, action) {
   const { type, payload } = action;
 
   switch (type) {
+  case USER_REGISTER:
   case USER_LOGIN:
     return handle(state, action, {
       start: prevState => ({

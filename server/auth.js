@@ -1,10 +1,36 @@
 import { User } from '../db/models';
 
 export default {
-  login (username, password, done) {
+  signup (req, email, password, done) {
+    var {
+      firstName,
+      lastName
+    } = req.body;
+
     User.findOne({
         where: {
-          email: username
+          email
+        }
+      })
+      .then(user => {
+        if (user) {
+          return done(null, false, { message: 'That email is already registered.' });
+        } else {
+          return User.create({
+            firstName,
+            lastName,
+            email,
+            password
+          });
+        }
+      })
+      .then(user => done(null, user));
+  },
+
+  login (email, password, done) {
+    User.findOne({
+        where: {
+          email
         }
       })
       .then(user => {
