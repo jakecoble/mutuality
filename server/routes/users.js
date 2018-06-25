@@ -8,23 +8,23 @@ const router = express.Router();
 router.post('/create',
             passport.authenticate('local-signup'),
             function (req, res) {
-              User.findOne({
-                where: {
-                  email: req.body.email
-                }
-              })
-                .then(user => res.json({ firstName: user.firstName, lastName: user.lastName }));
+              var {
+                firstName,
+                lastName
+              } = req.user;
+
+              res.json({ firstName, lastName });
             });
 
 router.post('/login',
             passport.authenticate('local-login'),
             function (req, res) {
-              User.findOne({
-                  where: {
-                    email: req.body.email
-                  }
-                })
-                .then(user => res.json({ firstName: user.firstName, lastName: user.lastName }));
+              var {
+                firstName,
+                lastName
+              } = req.user;
+
+              res.json({ firstName, lastName });
             });
 
 export default router;
